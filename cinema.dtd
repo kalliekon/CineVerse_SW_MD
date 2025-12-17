@@ -1,0 +1,68 @@
+<!ELEMENT cinema (directors, movies, awards)>
+<!ELEMENT directors (director+)>
+<!ELEMENT director (name, birthDate?, nationality*, bio?, awardsRef?, deathYear?)>
+<!ATTLIST director      
+	id		ID					#REQUIRED
+	status	(alive|deceased)	#IMPLIED
+>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birthDate (#PCDATA)>
+<!ELEMENT nationality (#PCDATA)>
+<!ELEMENT bio (#PCDATA)>
+<!ELEMENT awardsRef EMPTY>
+<!ATTLIST awardsRef   
+	refs	IDREFS	#REQUIRED
+>
+<!ELEMENT deathYear (#PCDATA)>
+<!ELEMENT movies (movie+)>
+<!ELEMENT movie (title, year, duration, genres, actors, production+, description?, boxOffice?, poster?, link?)>
+<!ATTLIST movie          
+	id			ID		#REQUIRED
+	directorRef	IDREF	#REQUIRED
+	type		CDATA	#FIXED "film"
+>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT genres (genre+)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT actors (actor+)>
+<!ELEMENT actor (((actorName, characterName) | (characterName, actorName)), actorBirthDate?, actorNationality*, actorDeathYear?)>
+<!ATTLIST actor      
+	roleType	(lead|supporting)	#IMPLIED
+	status		(alive|deceased)	#IMPLIED
+>
+<!ELEMENT actorName (#PCDATA)>
+<!ELEMENT characterName (#PCDATA)>
+<!ELEMENT actorBirthDate (#PCDATA)>
+<!ELEMENT actorNationality (#PCDATA)>
+<!ELEMENT actorDeathYear (#PCDATA)>
+<!ELEMENT production (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT boxOffice (budget?, revenue?)>
+<!ELEMENT budget (#PCDATA)>
+<!ELEMENT revenue (#PCDATA)>
+<!ELEMENT poster EMPTY>
+<!ATTLIST poster      
+	url			CDATA			#REQUIRED
+	encoding	(mime|binhex)	"mime"
+>
+<!ELEMENT link (imdb | youtube)>
+<!ELEMENT imdb EMPTY>
+<!ATTLIST imdb   
+	href	CDATA	#REQUIRED
+>
+<!ELEMENT youtube EMPTY>
+<!ATTLIST youtube   
+	href	CDATA	#REQUIRED
+>
+<!ELEMENT awards (award+)>
+<!ELEMENT award (awardTitle, awardOrganization, awardCategory, awardYear, awardWork?)>
+<!ATTLIST award   
+	id	ID	#REQUIRED
+>
+<!ELEMENT awardTitle (#PCDATA)>
+<!ELEMENT awardOrganization (#PCDATA)>
+<!ELEMENT awardCategory (#PCDATA)>
+<!ELEMENT awardYear (#PCDATA)>
+<!ELEMENT awardWork (#PCDATA)>
